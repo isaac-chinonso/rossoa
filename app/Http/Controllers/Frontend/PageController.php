@@ -18,6 +18,7 @@ use App\Models\User;
 use App\Models\VoteCandidate;
 use App\Models\Votedate;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
@@ -50,6 +51,7 @@ class PageController extends Controller
     {
         return view('frontend.mission');
     }
+
     public function president()
     {
         return view('frontend.president');
@@ -160,6 +162,11 @@ class PageController extends Controller
     public function login()
     {
         return view('frontend.login');
+    }
+
+    public function profile1()
+    {
+        return view('frontend.profile1');
     }
 
     public function products()

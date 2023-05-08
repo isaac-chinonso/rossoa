@@ -1,6 +1,6 @@
-@extends('layout.userapp')
+@extends('layout.userapp2')
 @section('title')
-My Jobs || RSSOSA
+Waiting Admin Approva || RSSOSA
 @endsection
 @section('content')
 
@@ -12,7 +12,7 @@ My Jobs || RSSOSA
             <div class="row align-items-center">
                 <div class="col-lg-6 col-sm-6">
                     <div class="page-title">
-                        <h3>Notice Board</h3>
+                        <h3>Authetication</h3>
                     </div>
                 </div>
             </div>
@@ -25,18 +25,21 @@ My Jobs || RSSOSA
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    @include('include.success')
+                    @include('include.warning')
+                    @include('include.error')
                     <div class="performance-date">
-                        <div class="main-title d-flex justify-content-between align-items-center">
-                            <h3>Notice</h3>
-                        </div>
 
                         <ul class="performance-date-list">
-                            @foreach($noticeboard as $notice)
+
                             <li>
-                                <h3>{{ $notice->noticesubject }} <span>{{ $notice->created_at->format('d M Y ') }}</span></h3>
-                                <p>{{ $notice->notice }}</p>
+                                <h3 style="font-size: 18px;"> Welcome to Rssosa <span style="font-size: 18px;">{{ Auth::user()->profile->first()->fname }}</span></h3>
+                                <p style="font-size: 16px;">We are proud ALUMNI of Remo Secondary School.<br> Our goal is promoting the spirit of fellowship, mutual love, and cooperation among all members. </p>
+                                <span class="text-info">We are currently reviewing your account and would be approved once verified.</span><br><br>
+                                @if(Auth::user()->status == 0)
+                                <span class="badge bg-danger text-white">Pending Approval</span><br><br><br>
+                                @endif
                             </li>
-                            @endforeach
                         </ul>
                     </div>
                 </div>

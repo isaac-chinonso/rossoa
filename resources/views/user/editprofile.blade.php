@@ -1,6 +1,6 @@
 @extends('layout.userapp')
 @section('title')
-Edit Profile || ROSSOA
+Edit Profile || RSSOSA
 @endsection
 @section('content')
 
@@ -52,7 +52,7 @@ Edit Profile || ROSSOA
                                         <input type="text" class="form-control" name="lname" value="{{ Auth::user()->profile->first()->lname }}">
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <div class="form-group">
                                         <label>Email</label>
                                         <input type="email" class="form-control" disabled value="{{ Auth::user()->email }}">
@@ -62,6 +62,12 @@ Edit Profile || ROSSOA
                                     <div class="form-group">
                                         <label>Phone Number</label>
                                         <input type="text" class="form-control" name="phone" value="{{ Auth::user()->profile->first()->phone }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Alternative Phone Number</label>
+                                        <input type="text" class="form-control" name="alt_phone" value="{{ Auth::user()->profile->first()->alt_phone }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -103,6 +109,30 @@ Edit Profile || ROSSOA
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Post Held While in School</label>
+                                        <input type="text" class="form-control" name="post_held" value="{{ Auth::user()->profile->first()->post_held }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Post Held in Association</label>
+                                        <input type="text" class="form-control" name="associate_post" value="{{ Auth::user()->profile->first()->associate_post }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Name of Institution</label>
+                                        <input type="text" class="form-control" name="institution" value="{{ Auth::user()->profile->first()->institution }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Course of Study</label>
+                                        <input type="text" class="form-control" name="course" value="{{ Auth::user()->profile->first()->course }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-12">

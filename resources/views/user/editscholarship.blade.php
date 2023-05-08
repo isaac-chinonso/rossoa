@@ -1,6 +1,6 @@
 @extends('layout.userapp1')
 @section('title')
-Edit Scholarship || ROSSOA
+Edit Scholarship || RSSOSA
 @endsection
 @section('content')
 

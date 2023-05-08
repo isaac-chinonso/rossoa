@@ -18,13 +18,18 @@ class CreateProfilesTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->string('fname');
             $table->string('lname');
-            $table->string('entryyear')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('gender')->nullable();
-            $table->string('occupation')->nullable();
             $table->string('nickname')->nullable();
-            $table->string('location')->nullable();
+            $table->string('entryyear')->nullable();
+            $table->string('occupation')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('alt_phone')->nullable();
+            $table->string('post_held')->nullable();
+            $table->string('associate_post')->nullable();
             $table->string('dob')->nullable();
+            $table->string('location')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('institution')->nullable();
+            $table->string('course')->nullable(); 
             $table->string('pimage')->nullable();
             $table->string('description')->nullable();
             $table->foreign('user_id')->references('id')->on('users')

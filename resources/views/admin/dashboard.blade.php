@@ -25,6 +25,9 @@ Dashboard || ROSSOA
             <!-- end page title -->
 
             <div class="row">
+                @include('include.success')
+                @include('include.warning')
+                @include('include.error')
                 <div class="col-xl-4">
                     <div class="card overflow-hidden">
                         <div class="bg-primary bg-soft">
@@ -45,7 +48,7 @@ Dashboard || ROSSOA
                     <div class="card">
                         <img class="card-img-top img-fluid" src="../event/{{ $event->coverimage }}" alt="Card image cap">
                         <div class="card-body">
-                           
+
                             <h2 class="card-title" style="font-size:30px;">{{ $event->title }}</h2>
                             <p class="card-text">
                             <h4> {{ $event->location }}</h4><br>
@@ -127,7 +130,7 @@ Dashboard || ROSSOA
                                 <div class="card-body">
                                     <div class="d-flex">
                                         <div class="flex-grow-1">
-                                            <p class="text-muted fw-medium">Total Dues Paid</p>
+                                            <p class="text-muted fw-medium">Total Dues Paid</p><br>
                                             <h4 class="mb-0">₦{{ $user }}.00</h4>
                                         </div>
 
@@ -187,7 +190,6 @@ Dashboard || ROSSOA
                         <div class="card-body">
                             <div class="d-sm-flex flex-wrap">
                                 <h4 class="card-title mb-4">Recent Job Post</h4>
-
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-striped mb-0">
@@ -225,61 +227,99 @@ Dashboard || ROSSOA
                 </div>
                 <!-- end row -->
 
-
-                <!-- end row -->
-
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title mb-4">Latest Dues Transaction</h4>
+                                <h4 class="card-title mb-4">Pending Users</h4>
                                 <div class="table-responsive">
                                     <table class="table align-middle table-nowrap mb-0">
                                         <thead class="table-light">
                                             <tr>
-                                                <th style="width: 20px;">
-                                                    <div class="form-check font-size-16 align-middle">
-                                                        <input class="form-check-input" type="checkbox" id="transactionCheck01">
-                                                        <label class="form-check-label" for="transactionCheck01"></label>
-                                                    </div>
-                                                </th>
-                                                <th class="align-middle">Order ID</th>
-                                                <th class="align-middle">Billing Name</th>
-                                                <th class="align-middle">Date</th>
-                                                <th class="align-middle">Total</th>
-                                                <th class="align-middle">Payment Status</th>
-                                                <th class="align-middle">Payment Method</th>
-                                                <th class="align-middle">View Details</th>
+                                                <th>S/N</th>
+                                                <th>Fullame</th>
+                                                <th>Email</th>
+                                                <th>Nickname</th>
+                                                <th>Passing Year</th>
+                                                <th>gender</th>
+                                                <th>Occupation</th>
+                                                <th>Location</th>
+                                                <th>DOB</th>
+                                                <th>Phone </th>
+                                                <th>Alternative Phone</th>
+                                                <th>Post Held While in School</th>
+                                                <th>Post Held in Association</th>
+                                                <th>Name of Institution</th>
+                                                <th>Course of Study</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <!-- <tr>
+                                            <?php $number = 1; ?>
+                                            @foreach($users as $use)
+                                            <tr>
+                                                <td>{{ $number }}</td>
+                                                <td>{{ $use->profile->first()->fname }}{{ $use->profile->first()->lname }}</td>
+                                                <td>{{ $use->email }}</td>
+                                                <td>{{ $use->profile->first()->nickname }}</td>
+                                                <td>{{ $use->profile->first()->entryyear }}</td>
+                                                <td>{{ $use->profile->first()->gender }}</td>
+                                                <td>{{ $use->profile->first()->occupation }}</td>
+                                                <td>{{ $use->profile->first()->location }}</td>
+                                                <td>{{ $use->profile->first()->dob }}</td>
+                                                <td>{{ $use->profile->first()->phone }}</td>
+                                                <td>{{ $use->profile->first()->alt_phone }}</td>
+                                                <td>{{ $use->profile->first()->post_held }}</td>
+                                                <td>{{ $use->profile->first()->associate_post }}</td>
+                                                <td>{{ $use->profile->first()->institution }}</td>
+                                                <td>{{ $use->profile->first()->course }}</td>
                                                 <td>
-                                                    <div class="form-check font-size-16">
-                                                        <input class="form-check-input" type="checkbox" id="transactionCheck02">
-                                                        <label class="form-check-label" for="transactionCheck02"></label>
+                                                    <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#activate{{ $use->id }}"> Approve </button>
+                                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#decline{{ $use->id }}"> Decline </button>
+                                                </td>
+                                                <!--Approve modal content -->
+                                                <div id="activate{{ $use->id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title" id="myModalLabel">Approve User</h4>
+                                                                <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">×</button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h4><strong>Approve Registration</strong></h4>
+                                                                <p>Are you sure you want to Approve Registration of <strong>{{ $use->profile->first()->fname }}{{ $use->profile->first()->lname }}</strong></p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Close</button>
+                                                                <a href="{{ route('approveuserauth',$use->id) }}" class="btn btn-success btn-sm waves-effect waves-light">Approve Registration</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </td>
-                                                <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2540</a> </td>
-                                                <td>Neal Matthews</td>
-                                                <td>
-                                                    07 Oct, 2019
-                                                </td>
-                                                <td>
-                                                    $400
-                                                </td>
-                                                <td>
-                                                    <span class="badge badge-pill badge-soft-success font-size-11">Paid</span>
-                                                </td>
-                                                <td>
-                                                    <i class="fab fa-cc-mastercard me-1"></i> Mastercard
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
-                                                        View Details
-                                                    </button>
-                                                </td>
-                                            </tr> -->
+                                                </div>
+                                                <!-- /.modal -->
+                                                <!--Decline modal content -->
+                                                <div id="decline{{ $use->id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title" id="myModalLabel">Decline User</h4>
+                                                                <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">×</button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h4><strong>Decline Registration</strong></h4>
+                                                                <p>Are you sure you want to Decline Registration of <strong>{{ $use->profile->first()->fname }}{{ $use->profile->first()->lname }}</strong></p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Close</button>
+                                                                <a href="{{ route('declineuserauth',$use->id) }}" class="btn btn-danger btn-sm waves-effect waves-light">Decline Registration</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal -->
+                                            </tr>
+                                            <?php $number++; ?>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -293,92 +333,6 @@ Dashboard || ROSSOA
             <!-- container-fluid -->
         </div>
         <!-- End Page-content -->
-
-        <!-- Transaction Modal -->
-        <div class="modal fade transaction-detailModal" tabindex="-1" role="dialog" aria-labelledby="transaction-detailModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="transaction-detailModalLabel">Order Details</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p class="mb-2">Product id: <span class="text-primary">#SK2540</span></p>
-                        <p class="mb-4">Billing Name: <span class="text-primary">Neal Matthews</span></p>
-
-                        <div class="table-responsive">
-                            <table class="table align-middle table-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Product</th>
-                                        <th scope="col">Product Name</th>
-                                        <th scope="col">Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">
-                                            <div>
-                                                <img src="assetsadmin/images/product/img-7.png" alt="" class="avatar-sm">
-                                            </div>
-                                        </th>
-                                        <td>
-                                            <div>
-                                                <h5 class="text-truncate font-size-14">Wireless Headphone (Black)</h5>
-                                                <p class="text-muted mb-0">$ 225 x 1</p>
-                                            </div>
-                                        </td>
-                                        <td>$ 255</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <div>
-                                                <img src="assetsadmin/images/product/img-4.png" alt="" class="avatar-sm">
-                                            </div>
-                                        </th>
-                                        <td>
-                                            <div>
-                                                <h5 class="text-truncate font-size-14">Phone patterned cases</h5>
-                                                <p class="text-muted mb-0">$ 145 x 1</p>
-                                            </div>
-                                        </td>
-                                        <td>$ 145</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <h6 class="m-0 text-right">Sub Total:</h6>
-                                        </td>
-                                        <td>
-                                            $ 400
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <h6 class="m-0 text-right">Shipping:</h6>
-                                        </td>
-                                        <td>
-                                            Free
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <h6 class="m-0 text-right">Total:</h6>
-                                        </td>
-                                        <td>
-                                            $ 400
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end modal -->
 
 
         <footer class="footer">

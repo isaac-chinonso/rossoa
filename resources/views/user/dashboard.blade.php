@@ -1,6 +1,6 @@
 @extends('layout.userapp')
 @section('title')
-Dashboard || ROSSOA
+Dashboard || RSSOSA
 @endsection
 @section('content')
 
@@ -79,13 +79,13 @@ Dashboard || ROSSOA
                         <div class="row align-items-center">
                             <div class="col-lg-12">
                                 <div class="profile-info d-flex align-items-center">
-                                    <img class="w-25 rounded-circle" src="https://png.pngtree.com/png-vector/20190114/ourlarge/pngtree-vector-avatar-icon-png-image_313572.jpg" alt="profile-img">
+                                    <img class="w-25 rounded-circle" src="../assetsuser/images/profile.jpg" alt="profile-img">
                                     <div class="profile-name ms-4">
                                         <h4>{{ Auth::user()->profile->first()->fname }} {{ Auth::user()->profile->first()->lname }}</h4>
                                         <span>Member Since: {{ Auth::user()->created_at->format('d M Y ') }}</span>
                                         <div class="text-end edit-massage">
                                             <a href="{{ url('/election') }}" class="btn btn-primary">
-                                                Cast Vote
+                                                Cast 
                                             </a>
                                             <a href="edit-profile.html" class="btn btn-secondary">
                                                 Pay Dues

@@ -39,6 +39,7 @@ class AdminPageController extends Controller
         $data['gallery'] = Gallery::count();
         $data['event'] = Event::latest()->where('status', 1)->limit(1)->get();
         $data['job'] = Job::latest()->where('status', 1)->paginate(5);
+        $data['users'] = User::where('role_id', 2)->where('status', 0)->get();
         return view('admin.dashboard', $data);
     }
 

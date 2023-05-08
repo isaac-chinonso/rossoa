@@ -60,78 +60,149 @@ Login || Rssosa
                                             <div class="register-form">
                                                 <form method="POST" action="{{ url('savelogin') }}">
                                                     @csrf
-                                                    <div class="row">
-                                                        <div class="col-12 col-sm-6">
-                                                            <div class="form-group">
-                                                                <label>First Name</label>
-                                                                <input type="text" class="form-control" name="fname" />
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-12 col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label>First Name</label>
+                                                                        <input type="text" class="form-control" name="fname" value="{{ Request::old('fname')}}">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label>Last Name</label>
+                                                                        <input type="text" name="lname" class="form-control" value="{{ Request::old('lname')}}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Nickname while in school</label>
+                                                                        <input type="text" class="form-control" name="nickname" value="{{ Request::old('nickname')}}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Class Set (Graduation Year)</label>
+                                                                        <input type="text" class="form-control" name="entryyear" value="{{ Request::old('entryyear')}}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Occupation</label>
+                                                                        <input type="text" class="form-control" name="occupation" value="{{ Request::old('occupation')}}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Email</label>
+                                                                        <input type="email" class="form-control" name="email" value="{{ Request::old('email')}}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Phone Number (Whatsapp)</label>
+                                                                        <input type="phone" class="form-control" name="phone" value="{{ Request::old('phone')}}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Alternative Number</label>
+                                                                        <input type="phone" class="form-control" name="alt_phone" value="{{ Request::old('alt_phone')}}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Post Held while in School</label>
+                                                                        <input type="text" class="form-control" name="post_held" value="{{ Request::old('post_held')}}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Post held in Association</label>
+                                                                        <input type="phone" class="form-control" name="associate_post" value="{{ Request::old('associate_post')}}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Date of Birth</label>
+                                                                        <input type="date" class="form-control" name="dob" value="{{ Request::old('dob')}}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Location (eg: Ogun, Nigeria)</label>
+                                                                        <input type="text" class="form-control" name="location" value="{{ Request::old('location')}}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="gender form-group">
+                                                                        <label class="g-name d-block">Gender</label>
+                                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                                            <input type="radio" id="register_gender_male" name="gender" value="Male" class="custom-control-input" />
+                                                                            <label class="custom-control-label" for="register_gender_male">Male</label>
+                                                                        </div>
+                                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                                            <input type="radio" id="register_gender_female" name="gender" value="Female" class="custom-control-input">
+                                                                            <label class="custom-control-label" for="register_gender_female">Female</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Password</label>
+                                                                        <input type="password" class="form-control" name="password" />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Confirm Password</label>
+                                                                        <input type="password" class="form-control" name="confirm_password" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div><br>
+
+                                                    <div class="card">
+                                                        <div class="card-header bg-success text-white">
+                                                            <h6 class="card-title">Student Section</h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <p style="font-size: 13px;">Please fill the form correctly as a student, this will enable us share opportunities from the association to you regarding your choice of career.</p>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Name of Institution</label>
+                                                                        <input type="text" class="form-control" name="institution" value="{{ Request::old('institution')}}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Course of Study</label>
+                                                                        <input type="text" class="form-control" name="course" value="{{ Request::old('course')}}">
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-12 col-sm-6">
-                                                            <div class="form-group">
-                                                                <label>Last Name</label>
-                                                                <input type="text" name="lname" class="form-control" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Nickname while in school</label>
-                                                                <input type="text" class="form-control" name="nickname" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Passing Year</label>
-                                                                <input type="text" class="form-control" name="entryyear" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Occupation</label>
-                                                                <input type="text" class="form-control" name="occupation" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Email</label>
-                                                                <input type="email" class="form-control" name="email" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="gender form-group">
-                                                                <label class="g-name d-block">Gender</label>
-                                                                <div class="custom-control custom-radio custom-control-inline">
-                                                                    <input type="radio" id="register_gender_male" name="gender" value="mail" class="custom-control-input" />
-                                                                    <label class="custom-control-label" for="register_gender_male">Male</label>
-                                                                </div>
-                                                                <div class="custom-control custom-radio custom-control-inline">
-                                                                    <input type="radio" id="register_gender_female" name="gender" value="female" class="custom-control-input">
-                                                                    <label class="custom-control-label" for="register_gender_female">Female</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Password</label>
-                                                                <input type="password" class="form-control" name="password" />
-                                                            </div>
-                                                        </div>
 
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Confirm Password</label>
-                                                                <input type="password" class="form-control" name="confirm_password" />
-                                                            </div>
-                                                        </div>
                                                     </div>
 
                                                     <div class="form-group">

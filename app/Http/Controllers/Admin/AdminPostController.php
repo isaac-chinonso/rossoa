@@ -15,6 +15,7 @@ use App\Models\Product;
 use App\Models\Project;
 use Illuminate\Support\Str;
 use App\Models\Scholarship;
+use App\Models\User;
 
 class AdminPostController extends Controller
 {
@@ -568,6 +569,28 @@ class AdminPostController extends Controller
         $project->delete();
 
         \Session::flash('Success_message', 'Project Deleted Successfully');
+        return back();
+    }
+
+    public function approveuser($id)
+    {
+        // Approve User
+        User::where(['id' => $id])
+            ->update(array('status' => 1));
+
+        \Session::flash('Success_message', '✔ User Approved Successfully');
+
+        return back();
+    }
+
+    public function deleteuser($id)
+    {
+        // Delete User
+        $user = User::where('id', $id)->first();
+        $user->delete();
+
+        \Session::flash('Success_message', '✔ User Declined Successfully');
+
         return back();
     }
 }

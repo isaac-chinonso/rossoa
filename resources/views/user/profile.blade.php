@@ -1,6 +1,6 @@
 @extends('layout.userapp')
 @section('title')
-Profile || ROSSOA
+Profile || RSSOSA
 @endsection
 @section('content')
 
@@ -75,8 +75,20 @@ Profile || ROSSOA
                                     {{ Auth::user()->profile->first()->phone }}
                                 </li>
                                 <li>
+                                    <span>Alternative Phone :</span>
+                                    {{ Auth::user()->profile->first()->alt_phone }}
+                                </li>
+                                <li>
                                     <span>Occupation :</span>
                                     {{ Auth::user()->profile->first()->occupation }}
+                                </li>
+                                <li>
+                                    <span>Post Held While in School :</span>
+                                    {{ Auth::user()->profile->first()->post_held }}
+                                </li>
+                                <li>
+                                    <span>Post Held in Association :</span>
+                                    {{ Auth::user()->profile->first()->associate_post }}
                                 </li>
                             </ul>
                         </div>
@@ -100,6 +112,14 @@ Profile || ROSSOA
                                 <li>
                                     <span>Gender :</span>
                                     <a href="#">{{ Auth::user()->profile->first()->gender }}</a>
+                                </li>
+                                <li>
+                                    <span>Name of Institution :</span>
+                                    <a href="#">{{ Auth::user()->profile->first()->institution }}</a>
+                                </li>
+                                <li>
+                                    <span>Course of Study :</span>
+                                    <a href="#">{{ Auth::user()->profile->first()->course }}</a>
                                 </li>
                             </ul>
                         </div>

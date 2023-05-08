@@ -79,6 +79,8 @@ Route::post('sigin', [AuthController::class, 'signin']);
 
 Route::get('login', [PageController::class, 'login'])->name('login');
 
+Route::get('authentication-confirmation', [PageController::class, 'profile1'])->name('profile1');
+
 Route::post('savelogin', [AuthController::class, 'savelogin']);
 
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
@@ -86,6 +88,10 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'before' => 'admin'], function () {
 
     Route::get('/', [AdminPageController::class, 'dashboard'])->name('admindashboard');
+
+    Route::get('approve-user/{id}', [AdminPostController::class, 'approveuser'])->name('approveuserauth');
+
+    Route::get('decline-user/{id}', [AdminPostController::class, 'deleteuser'])->name('declineuserauth');
 
     Route::get('/product', [AdminPageController::class, 'product']);
 
@@ -136,7 +142,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'before' => 'admin'],
     Route::get('/national-voting-candidate/{id}', [AdminPageController::class, 'nationalvotingcandidate'])->name('nationalvotingcandidate');
 
     Route::get('/batch-voting', [AdminPageController::class, 'batchvoting']);
-
 
     Route::post('/save-batch-vote-category', [AdminVoteController::class, 'savebatchvotecategory']);
 
@@ -245,6 +250,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'user', 'before' => 'user'], f
 
     Route::get('/dashboard', [UserPageController::class, 'dashboard'])->name('userdashboard');
 
+    Route::get('/pending-approval', [UserPageController::class, 'pendingapproval'])->name('userauthpending');
+    
     Route::get('/product', [UserPageController::class, 'product'])->name('userproduct');
 
     Route::get('/submit-product', [UserPageController::class, 'addproduct'])->name('useraddproduct');

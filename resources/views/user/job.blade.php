@@ -1,6 +1,6 @@
 @extends('layout.userapp')
 @section('title')
-My Jobs || ROSSOA
+My Jobs || RSSOSA
 @endsection
 @section('content')
 

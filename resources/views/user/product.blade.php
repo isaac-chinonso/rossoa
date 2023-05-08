@@ -1,6 +1,6 @@
 @extends('layout.userapp')
 @section('title')
-My Product || ROSSOA
+My Product || RSSOSA
 @endsection
 @section('content')
 

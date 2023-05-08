@@ -40,14 +40,20 @@ Members || ROSSOA
                                         <tr>
                                             <th>#</th>
                                             <th>Fullame</th>
-                                            <th>Email</th>
-                                            <th>Nickname</th>
-                                            <th>Passing Year</th>
-                                            <th>gender</th>
-                                            <th>Occupation</th>
-                                            <th>Location</th>
-                                            <th>DOB</th>
-                                            <th>BIO</th>
+                                                <th>Email</th>
+                                                <th>Nickname</th>
+                                                <th>Passing Year</th>
+                                                <th>gender</th>
+                                                <th>Occupation</th>
+                                                <th>Location</th>
+                                                <th>DOB</th>
+                                                <th>Phone </th>
+                                                <th>Alternative Phone</th>
+                                                <th>Post Held While in School</th>
+                                                <th>Post Held in Association</th>
+                                                <th>Name of Institution</th>
+                                                <th>Course of Study</th>
+                                                <th>BIO</th>
                                         </tr>
                                     </thead>
 
@@ -58,14 +64,20 @@ Members || ROSSOA
                                         <tr>
                                             <td>{{ $number }}</td>
                                             <td>{{ $use->profile->first()->fname }}{{ $use->profile->first()->lname }}</td>
-                                            <td>{{ $use->email }}</td>
-                                            <td>{{ $use->profile->first()->nickname }}</td>
-                                            <td>{{ $use->profile->first()->entryyear }}</td>
-                                            <td>{{ $use->profile->first()->gender }}</td>
-                                            <td>{{ $use->profile->first()->occupation }}</td>
-                                            <td>{{ $use->profile->first()->location }}</td>
-                                            <td>{{ $use->profile->first()->dob }}</td>
-                                            <td>{{ $use->profile->first()->description }}</td>
+                                                <td>{{ $use->email }}</td>
+                                                <td>{{ $use->profile->first()->nickname }}</td>
+                                                <td>{{ $use->profile->first()->entryyear }}</td>
+                                                <td>{{ $use->profile->first()->gender }}</td>
+                                                <td>{{ $use->profile->first()->occupation }}</td>
+                                                <td>{{ $use->profile->first()->location }}</td>
+                                                <td>{{ $use->profile->first()->dob }}</td>
+                                                <td>{{ $use->profile->first()->phone }}</td>
+                                                <td>{{ $use->profile->first()->alt_phone }}</td>
+                                                <td>{{ $use->profile->first()->post_held }}</td>
+                                                <td>{{ $use->profile->first()->associate_post }}</td>
+                                                <td>{{ $use->profile->first()->institution }}</td>
+                                                <td>{{ $use->profile->first()->course }}</td>
+                                                <td>{{ $use->profile->first()->description }}</td>
 
                                         </tr>
                                         <?php $number++; ?>

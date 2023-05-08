@@ -1,6 +1,6 @@
 @extends('layout.userapp')
 @section('title')
-Submit Product || ROSSOA
+Submit Product || RSSOSA
 @endsection
 @section('content')
 

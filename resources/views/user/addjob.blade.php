@@ -1,6 +1,6 @@
 @extends('layout.userapp')
 @section('title')
-Submit Job Opening || ROSSOA
+Submit Job Opening || RSSOSA
 @endsection
 @section('content')
 

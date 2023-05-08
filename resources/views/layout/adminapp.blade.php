@@ -36,19 +36,19 @@
                     <div class="navbar-brand-box">
                         <a href="{{ url('admin/') }}" class="logo logo-dark">
                             <span class="logo-sm">
-                                <img src="../assetsadmin/images/logo.svg" alt="" height="22">
+                                <h3 class="text-white">RSSOSA</h3>
                             </span>
                             <span class="logo-lg">
-                                <img src="../assetsadmin/images/logo-dark.png" alt="" height="17">
+                                <h3 class="text-white" style="padding-top: 20px;">RSSOSA</h3>
                             </span>
                         </a>
 
                         <a href="{{ url('admin/') }}" class="logo logo-light">
                             <span class="logo-sm">
-                                <img src="../assetsadmin/images/logo-light.svg" alt="" height="22">
+                                <h3 class="text-white pt-20">RSSOSA</h3>
                             </span>
                             <span class="logo-lg">
-                                <img src="../assetsadmin/images/logo-light.png" alt="" height="19">
+                                <h3 class="text-white" style="padding-top: 20px;">RSSOSA</h3>
                             </span>
                         </a>
                     </div>

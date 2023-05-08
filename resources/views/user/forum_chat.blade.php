@@ -1,6 +1,6 @@
 @extends('layout.userapp1')
 @section('title')
-Forum || ROSSOA
+Forum || RSSOSA
 @endsection
 @section('content')
 

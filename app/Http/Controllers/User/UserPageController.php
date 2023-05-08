@@ -29,6 +29,11 @@ class UserPageController extends Controller
         return view('user.dashboard', $data);
     }
 
+    public function pendingapproval()
+    {
+        return view('user.awaiting_page');
+    }
+
     public function product()
     {
         $user = Auth::user();

@@ -31,10 +31,16 @@ class AuthController extends Controller
             return redirect()->intended(route('admindashboard'));
         }
 
-        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password'], 'role_id' => '2'])) {
+        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password'], 'role_id' => '2' , 'status' => '1'])) {
 
             return redirect()->intended(route('userdashboard'));
         }
+
+        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password'], 'role_id' => '2' , 'status' => '0'])) {
+
+            return redirect()->intended(route('userauthpending'));
+        }
+
         \Session::flash('warning_message', 'These credentials do not match our records.');
 
         return redirect()->back();
@@ -47,11 +53,16 @@ class AuthController extends Controller
         $this->validate($request, [
             'fname' => 'required',
             'lname' => 'required',
-            'gender' => 'required',
-            'email' => 'required|email|unique:users',
-            'occupation' => 'required',
-            'entryyear' => 'required',
             'nickname' => 'required',
+            'entryyear' => 'required',
+            'occupation' => 'required',
+            'email' => 'required|email|unique:users',
+            'phone' => 'required',
+            'post_held' => 'required',
+            'associate_post' => 'required',
+            'dob' => 'required',
+            'location' => 'required',
+            'gender' => 'required',
             'password' => 'required|min:4',
             'confirm_password' => 'required|same:password',
         ]);
@@ -61,7 +72,7 @@ class AuthController extends Controller
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
         $user->role_id = 2;
-        $user->status = 1;
+        $user->status = 0;
         if (User::where('email', '=', $user->email)->exists()) {
             return redirect()->back()->with('warning_message', 'User Already Exist');
         } else {
@@ -73,13 +84,18 @@ class AuthController extends Controller
         $profile->user_id = $user->id;
         $profile->fname = $request->input('fname');
         $profile->lname = $request->input('lname');
-        $profile->occupation = $request->input('occupation');
-        $profile->gender = $request->input('gender');
         $profile->nickname = $request->input('nickname');
         $profile->entryyear = $request->input('entryyear');
-        $profile->phone = '';
-        $profile->location = '';
-        $profile->dob = '';
+        $profile->occupation = $request->input('occupation');
+        $profile->phone = $request->input('phone');
+        $profile->alt_phone = $request->input('alt_phone');
+        $profile->post_held = $request->input('post_held');
+        $profile->associate_post = $request->input('associate_post');
+        $profile->dob = $request->input('dob');
+        $profile->location = $request->input('location');
+        $profile->gender = $request->input('gender');
+        $profile->institution = $request->input('institution');
+        $profile->course = $request->input('course');
         $profile->description = '';
         $profile->save();
 
@@ -89,7 +105,7 @@ class AuthController extends Controller
 
         \Session::flash('Success_message', 'You have successfully registered');
 
-        return redirect()->route('userdashboard');
+        return redirect()->route('profile1');
     }
 
     // Update profile function
@@ -105,6 +121,11 @@ class AuthController extends Controller
             'occupation' => 'required',
             'entryyear' => 'required',
             'nickname' => 'required',
+            'location' => 'required',
+            'post_held' => 'required',
+            'associate_post' => 'required',
+            'institution' => 'required',
+            'course' => 'required',
         ));
 
         $profile = Profile::find($id);
@@ -125,24 +146,35 @@ class AuthController extends Controller
 
         $profile->phone = $request->input('phone');
 
+        $profile->alt_phone = $request->input('alt_phone');
+
         $profile->location = $request->input('location');
 
         $profile->dob = $request->input('dob');
 
-        $profile->description = $request->input('description');
+        $profile->post_held = $request->input('post_held');
 
-         // save image 
-         $pimage = $request['pimage'];
-         $filename = $pimage->getClientOriginalName();
-         $destination = 'file';
-         $pimage->move($destination, $filename);
-         $profile->pimage = $filename;
+        $profile->associate_post = $request->input('associate_post');
+
+        $profile->institution = $request->input('institution');
+
+        $profile->course = $request->input('course');
+
+        $profile->description = $request->input('description');
+         
+        if ($request->hasFile('pimage')) {
+            $image = $request['pimage'];
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $destination = public_path('file/');
+            $image->move($destination, $filename);
+            $profile->pimage = $image;
+        }
 
         $profile->save();
 
         \Session::flash('Success_message', '✔ profile Updated Succeffully');
 
-        return back();
+        return redirect()->intended(route('userdashboard'));
     }
 
     // Logout Function
