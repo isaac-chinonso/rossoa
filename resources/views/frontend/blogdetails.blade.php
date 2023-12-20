@@ -11,7 +11,6 @@
             <div class="col-lg-8 m-auto text-center">
                 <div class="page-title-content">
                     <h1 class="h2">{{ $blogdetails->title }}</h1>
-                    <a href="#page-content-wrap" class="btn btn-brand smooth-scroll">Let's See</a>
                 </div>
             </div>
         </div>
@@ -62,19 +61,6 @@
                 <div class="col-lg-4 order-first order-lg-last">
 
                     <div class="sidebar-area-wrap">
-
-                        <!-- Single Sidebar Start -->
-                        <div class="single-sidebar-wrap">
-                            <h4 class="sidebar-title">Categories</h4>
-                            <div class="sidebar-body">
-                                <ul class="brand-unorderlist">
-                                    @foreach($categories as $cat)
-                                    <li><a href="#">{{ $cat->name }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Single Sidebar End -->
 
                         <!-- Single Sidebar Start -->
                         <div class="single-sidebar-wrap d-none d-lg-block">

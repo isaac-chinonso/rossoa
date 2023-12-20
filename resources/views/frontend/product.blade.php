@@ -58,7 +58,7 @@ Market Place || Rssosa
                                                     <h6>{{ $prod->feature }}</h6><hr>
                                                     
                                                     <p style="font-size: 14px;">{{ $prod->description }}</p>
-                                                    <button  class="add-cart-button"><i class="fa fa-whatsapp" style="font-size: 14px;"></i> Buy on Whatsapp</button>
+                                                    <button class="add-cart-button"><a href="https://api.whatsapp.com/send?phone=2349039129827&text={{ route('marketdetails', $prod->slug) }}" class="text-white"><i class="fa fa-whatsapp" style="font-size: 14px;"></i> Buy on Whatsapp</a></button>
                                                 </div>
                                             </div>
                                         </div>

@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Job;
 use App\Models\Message;
 use App\Models\Scholarship;
+use Illuminate\Support\Str;
 
 class UserPostController extends Controller
 {
@@ -32,6 +33,13 @@ class UserPostController extends Controller
         $destination = public_path('product/');
         $image->move($destination, $filename);
 
+        $slug = Str::slug($request->name);
+        $bslug = Product::where('slug', $slug)->first();
+        //check if slug exists
+        if ($bslug) {
+            $slug = $slug . '-copy';
+        }
+
         $user = Auth::user();
         // Save Record into Product DB
         $product = new Product();
@@ -44,6 +52,7 @@ class UserPostController extends Controller
         $product->feature = $request->input('feature');
         $product->description = $request->input('description');
         $product->image = $filename;
+        $product->slug = $slug;
         $product->status = 0;
         $product->save();
 
@@ -281,6 +290,7 @@ class UserPostController extends Controller
          $message->user_id = $user->id;
          $message->group_id = $request->input('group_id');
          $message->message = $request->input('message');
+         $message->status = 1;
          $message->save();
  
          \Session::flash('Success_message', 'Message Sent Successfully');

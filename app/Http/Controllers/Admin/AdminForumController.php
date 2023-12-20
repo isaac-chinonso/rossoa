@@ -106,4 +106,5 @@ class AdminForumController extends Controller
 
         return back();
     }
+    
 }

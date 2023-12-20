@@ -57,7 +57,7 @@
                 <div class="d-flex">
                     <!-- LOGO -->
                     <div class="navbar-brand-box">
-                        <a href="{{ url('admin/') }}" class="logo logo-dark">
+                        <a href="{{ url('/') }}" class="logo logo-dark">
                             <span class="logo-sm">
                                 <img src="../assetsadmin/images/logo.svg" alt="" height="22">
                             </span>
@@ -234,6 +234,7 @@
                 console.error(error);
             });
     </script>
+    
     <!-- JAVASCRIPT -->
     <script src="../assetsadmin/libs/jquery/jquery.min.js"></script>
     <script src="../assetsadmin/libs/bootstrap/js/bootstrap.bundle.min.js"></script>

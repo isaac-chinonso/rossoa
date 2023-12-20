@@ -191,8 +191,32 @@ Class Set Voting || ROSSOA
                                                 <button type="button" class="btn btn-info waves-effect waves-light" title="Voting Category Result">
                                                     <a href="{{ route('voteresult', $votecat->id) }}" class="text-white"> <i class="fa fa-file-alt font-size-16 align-middle me-2"></i> Results</a>
                                                 </button>
+                                                <button type="button" class="btn btn-danger waves-effect waves-light" title="Voting Category Result">
+                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#delete-category{{ $votecat->id }}" class="text-white"> <i class="fa fa-trash font-size-16 align-middle me-2"></i> Delete Category</a>
+                                                </button>
                                             </td>
                                         </tr>
+
+                                         <!-- modal content -->
+                                         <div id="delete-category{{ $votecat->id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="myModalLabel">Delete Class Set Voting Category</h4>
+                                                        <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">×</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h4><strong>Confirm Deletion</strong></h4>
+                                                        <p>Are you sure you want to Delete <strong>{{ $votecat->name }}</strong> Category</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Close</button>
+                                                        <a href="{{ route('deletebatchvotecategory',$votecat->id) }}" class="btn btn-danger btn-sm waves-effect waves-light">Delete Voting Category</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal -->
 
                                         <!-- modal content -->
                                         <div id="responsive-modal1{{ $votecat->id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">

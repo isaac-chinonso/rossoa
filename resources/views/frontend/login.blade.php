@@ -43,7 +43,8 @@ Login || Rssosa
                                                         <form method="post" action="{{ url('sigin') }}">
                                                             @csrf
                                                             <input type="email" name="email" placeholder="Enter your Email ID">
-                                                            <input type="password" name="password" placeholder="Password">
+                                                            <input type="password" id="password" name="password" placeholder="Password">
+                                                            <p class="reg-text mb-0">Forgot Password ? <a href="{{ url('/forget-password') }}">Click here Now</a></p>
                                                             <button type="submit" class="btn btn-reg">Login</button>
                                                         </form>
                                                     </div>
@@ -128,7 +129,7 @@ Login || Rssosa
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
-                                                                        <label>Post held in Association</label>
+                                                                        <label>Post held in Association (optional)</label>
                                                                         <input type="phone" class="form-control" name="associate_post" value="{{ Request::old('associate_post')}}">
                                                                     </div>
                                                                 </div>
@@ -166,14 +167,14 @@ Login || Rssosa
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         <label>Password</label>
-                                                                        <input type="password" class="form-control" name="password" />
+                                                                        <input type="password" id="password" class="form-control" name="password" />
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         <label>Confirm Password</label>
-                                                                        <input type="password" class="form-control" name="confirm_password" />
+                                                                        <input type="password" id="password" class="form-control" name="confirm_password" />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -225,5 +226,21 @@ Login || Rssosa
     </div>
 </section>
 <!--== Register Page Content End ==-->
+
+<script>
+    // JavaScript to toggle password visibility
+    const passwordInput = document.getElementById("password");
+    const passwordToggle = document.getElementById("password-toggle");
+
+    passwordToggle.addEventListener("click", () => {
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordToggle.textContent = "Hide";
+        } else {
+            passwordInput.type = "password";
+            passwordToggle.textContent = "Show";
+        }
+    });
+</script>
 
 @endsection

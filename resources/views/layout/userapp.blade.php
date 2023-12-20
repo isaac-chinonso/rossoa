@@ -69,7 +69,7 @@
                             </div>
 
                             <div class="main-logo">
-                                <a href="index.html">
+                                <a href="{{ url('/') }}">
                                     <h3 class="text-white">RSSOSA</h3>
                                 </a>
                             </div>

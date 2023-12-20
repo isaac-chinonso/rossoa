@@ -51,12 +51,32 @@ Blog || ROSSOA
                             <p>{{ $blog->short_desc }}</p>
 
                             <div>
-                                <a href="javascript: void(0);" class="text-primary">Read more <i class="mdi mdi-arrow-right"></i></a>
+                                <a href="{{ route('blogview', $blog->slug) }}" class="text-primary">Read more <i class="mdi mdi-arrow-right"></i></a>
                             </div>
                             <div align="right">
-                                <i class="fas fa-pencil-alt text-primar"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <i class="fas fa-trash text-danger"></i>
+                                <a href="{{ route('editblog', $blog->slug) }}"><i class="fas fa-pencil-alt text-primar"></i></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#responsive-modal2{{ $blog->id }}"><i class="fas fa-trash text-danger"></i></a>
                             </div>
+                            <!-- modal content -->
+                            <div id="responsive-modal2{{ $blog->id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="myModalLabel">Delete Blog Post</h4>
+                                            <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">×</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4><strong>Confirm Deletion</strong></h4>
+                                            <p>Are you sure you want to Delete <strong>{{ $blog->title }}</strong> Post</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Close</button>
+                                            <a href="{{ route('deleteblog',$blog->id) }}" class="btn btn-danger btn-sm waves-effect waves-light">Delete Blog</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.modal -->
 
                         </div>
 

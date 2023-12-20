@@ -137,7 +137,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-sm-7 col-7">
                         <div class="preheader-left">
-                            <a href="mailto:info@rssosa.com"><strong>Email:</strong> info@rssosa.com</a>
+                            <a href="mailto:info@rssosa.org"><strong>Email:</strong> info@rssosa.org, rssosa1946@gmail.com</a>
                             <a href="#"><strong>Hotline:</strong> +2348132693259</a>
                         </div>
                     </div>
@@ -147,7 +147,11 @@
                             @if(!Auth::check())
                             <a title="Register" class="btn-auth btn-auth" href="{{ url('login') }}">Login</a>
                             @else
+                            @if(Auth::user()->role_id == 1)
+                            <a title="Dashboard" class="btn-auth btn-auth" href="{{ url('admin/') }}">Dashboard</a>
+                            @elseif(Auth::user()->role_id == 2)
                             <a title="Dashboard" class="btn-auth btn-auth" href="{{ url('user/dashboard') }}">Dashboard</a>
+                            @endif
                             @endif
                         </div>
                     </div>
@@ -234,7 +238,7 @@
                             <h4 class="widget-title">Get In Touch</h4>
                             <div class="widgei-body">
                                 <a href="#"><i class="fa fa-phone"></i> &nbsp;&nbsp;&nbsp; +2348132693259</a> <br>
-                                <a href="#"><i class="fa fa-envelope"></i>&nbsp;&nbsp;&nbsp; info@rssosa.com</a>
+                                <a href="#"><i class="fa fa-envelope"></i>&nbsp;&nbsp;&nbsp; info@rssosa.org, rssosa1946@gmail.com</a>
                                 <div class="footer-social-icons">
                                     <a href="https://www.facebook.com/NationalRssOsa?mibextid=ZbWKwL" target="_blank"><i class="fa fa-facebook"></i></a>
                                     <a href="https://twitter.com/NationalRssosa?t=-TTxYQlOCY9ejpeu6Mk8Yw&s=09" target="_blank"><i class="fa fa-twitter"></i></a>

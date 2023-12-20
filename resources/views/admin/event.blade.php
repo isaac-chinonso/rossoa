@@ -81,7 +81,7 @@ Event || ROSSOA
                         <div class="card-body">
                             <h4 class="card-title">Event List</h4>
 
-                            <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                            <table id="datatable" class="table table-bordered dt-responsive">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -106,8 +106,9 @@ Event || ROSSOA
                                         <td>{{ $even->location }}</td>
                                         <td>{{ $even->description }}</td>
                                         <td>
-                                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#responsive-modal2{{ $even->id }}">Delete</button>
-                                            <!-- modal content -->
+                                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#responsive-modal2{{ $even->id }}"><i class="fa fa-trash"></i></button>
+                                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#EditModal{{ $even->id }}"><i class="fa fa-edit"></i></button>
+                                            <!-- delete modal content -->
                                             <div id="responsive-modal2{{ $even->id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
@@ -127,6 +128,53 @@ Event || ROSSOA
                                                 </div>
                                             </div>
                                             <!-- /.modal -->
+                                            <!-- Edit modal content -->
+                                            <div id="EditModal{{ $even->id }}" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="myModalLabel">Edit Event</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <form method="POST" action="{{ route('adminupdateevent', $even->id) }}" enctype="multipart/form-data">
+                                                            @csrf
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <label>Event Title</label>
+                                                                        <input type="text" name="title" class="form-control" value="{{ $even->title }}">
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <label>Cover Image</label>
+                                                                        <input type="file" name="image" class="form-control" value="{{ $even->coverimage }}">
+                                                                        <span><img src="../event/{{ $even->coverimage }}" style="height: 50px; width: 50px;"></span>
+                                                                    </div>
+                                                                </div><br>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <label>Event Date</label>
+                                                                        <input type="date" name="date" class="form-control" value="{{ $even->date }}">
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <label>Event Location</label>
+                                                                        <input type="text" name="location" class="form-control" value="{{ $even->location }}">
+                                                                    </div>
+                                                                </div><br>
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <label>Event Description</label>
+                                                                        <textarea class="form-control" name="description" rows="5">{{ $even->description }}</textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-success waves-effect waves-light">Update Event</button>
+                                                            </div>
+                                                        </form>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div><!-- /.modal -->
                                         </td>
                                     </tr>
                                     <?php $number++; ?>

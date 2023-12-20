@@ -3,6 +3,7 @@
 National Voting || ROSSOA
 @endsection
 @section('content')
+<link href="../assetsadmin/css/select2.min.css" rel="stylesheet" />
 
 <!-- ============================================================== -->
 <!-- Start right Content here -->
@@ -71,7 +72,7 @@ National Voting || ROSSOA
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <label>Candidate Name</label>
-                                                <select class="form-control selectpicker" name="user_id" data-live-search="true">
+                                                <select class="form-control" name="user_id" id="user-select">
                                                     @foreach($user as $use)
                                                     <option selected disabled>Select Users</option>
                                                     <option value="{{ $use->id }}">{{ $use->profile->first()->fname }} {{ $use->profile->first()->lname }}</option>
@@ -160,7 +161,7 @@ National Voting || ROSSOA
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">National Voting Positions</h4>
+                            <h4 class="card-title">National Voting Categoriess</h4>
                             <p class="card-title-desc"> This table display the categories for National Voting
                             </p>
                             <div class="table-responsive">
@@ -190,9 +191,31 @@ National Voting || ROSSOA
                                                 <button type="button" class="btn btn-info waves-effect waves-light" title="Voting Category Result">
                                                     <a href="{{ route('voteresult', $votecat->id) }}" class="text-white"> <i class="fa fa-file-alt font-size-16 align-middle me-2"></i> Results</a>
                                                 </button>
+                                                <button type="button" class="btn btn-danger waves-effect waves-light" title="Voting Category Result">
+                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#delete-category{{ $votecat->id }}" class="text-white"> <i class="fa fa-trash font-size-16 align-middle me-2"></i> Delete Category</a>
+                                                </button>
                                             </td>
                                         </tr>
-
+                                        <!-- modal content -->
+                                        <div id="delete-category{{ $votecat->id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="myModalLabel">Delete Voting Category</h4>
+                                                        <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">×</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h4><strong>Confirm Deletion</strong></h4>
+                                                        <p>Are you sure you want to Delete <strong>{{ $votecat->name }}</strong> Category</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Close</button>
+                                                        <a href="{{ route('deletevotecategory',$votecat->id) }}" class="btn btn-danger btn-sm waves-effect waves-light">Delete Voting Category</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal -->
                                         <!-- modal content -->
                                         <div id="responsive-modal1{{ $votecat->id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -308,5 +331,12 @@ National Voting || ROSSOA
     </footer>
 </div>
 <!-- end main content-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../assetsadmin/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#user-select').select2();
+    });
+</script>
 
 @endsection

@@ -131,7 +131,7 @@ Dashboard || ROSSOA
                                     <div class="d-flex">
                                         <div class="flex-grow-1">
                                             <p class="text-muted fw-medium">Total Dues Paid</p><br>
-                                            <h4 class="mb-0">₦{{ $user }}.00</h4>
+                                            <h4 class="mb-0">₦0.00</h4>
                                         </div>
 
                                         <div class="flex-shrink-0 align-self-center">

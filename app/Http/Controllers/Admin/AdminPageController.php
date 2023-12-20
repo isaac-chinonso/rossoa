@@ -26,6 +26,7 @@ use App\Models\VoteCandidate;
 use App\Models\VoteCategory;
 use App\Models\Votedate;
 use Illuminate\Http\Request;
+use Jorenvh\Share\Share;
 
 class AdminPageController extends Controller
 {
@@ -64,6 +65,30 @@ class AdminPageController extends Controller
     {
         $data['categories'] = BlogCategory::get();
         return view('admin.addblog', $data);
+    }
+
+    public function editblog($slug)
+    {
+        $data['blogdetails'] = Blog::where('slug', '=', $slug)->first();
+        $data['blogpost'] = Blog::where('status', '=', 1)->inRandomOrder()->simplePaginate(9);
+        $data['categories'] = BlogCategory::get();
+        return view('admin.editblog', $data);
+    }
+
+
+    public function blogdetails($slug)
+    {
+        $data['blogdetails'] = Blog::where('slug', '=', $slug)->first();
+        $data['blogpost'] = Blog::where('status', '=', 1)->inRandomOrder()->simplePaginate(9);
+        $data['categories'] = BlogCategory::get();
+        $data['shareButtons'] = \Share::page('https://rssosa.org/',
+        'What you are writing, just share to world to learn!!',)
+            ->facebook()
+            ->twitter()
+            ->linkedin()
+            ->telegram()
+            ->whatsapp();
+        return view('admin.blogdetails', $data);
     }
 
     public function blogcategory()

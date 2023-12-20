@@ -31,12 +31,12 @@ class AuthController extends Controller
             return redirect()->intended(route('admindashboard'));
         }
 
-        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password'], 'role_id' => '2' , 'status' => '1'])) {
+        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password'], 'role_id' => '2', 'status' => '1'])) {
 
             return redirect()->intended(route('userdashboard'));
         }
 
-        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password'], 'role_id' => '2' , 'status' => '0'])) {
+        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password'], 'role_id' => '2', 'status' => '0'])) {
 
             return redirect()->intended(route('userauthpending'));
         }
@@ -58,7 +58,6 @@ class AuthController extends Controller
             'occupation' => 'required',
             'email' => 'required|email|unique:users',
             'phone' => 'required',
-            'post_held' => 'required',
             'associate_post' => 'required',
             'dob' => 'required',
             'location' => 'required',
@@ -104,8 +103,11 @@ class AuthController extends Controller
         $user = Auth::user();
 
         \Session::flash('Success_message', 'You have successfully registered');
-
-        return redirect()->route('profile1');
+        if (User::where('status', '=', 0)) {
+            return redirect()->intended(route('userauthpending'));
+        } else {
+            return redirect()->route('profile1');
+        }
     }
 
     // Update profile function
@@ -161,7 +163,7 @@ class AuthController extends Controller
         $profile->course = $request->input('course');
 
         $profile->description = $request->input('description');
-         
+
         if ($request->hasFile('pimage')) {
             $image = $request['pimage'];
             $filename = time() . '.' . $image->getClientOriginalExtension();

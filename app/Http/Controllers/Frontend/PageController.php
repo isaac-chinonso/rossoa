@@ -29,8 +29,9 @@ class PageController extends Controller
         $data['scholarships'] = Scholarship::where('status', '=', 1)->inRandomOrder()->simplePaginate(3);
         $data['event'] = Event::where('status', 1)->latest()->take(1)->get();
         $data['galleries'] = Gallery::where('status', '=', 1)->inRandomOrder()->simplePaginate(6);
-        $today = now();
-        $data['birthday'] = Profile::whereMonth('dob', $today->month)->whereDay('dob', $today->day)->get();
+        $today = Carbon::today();
+        $data['birthday'] = Profile::whereDay('dob', $today->day)->whereMonth('dob', $today->month)->get();
+
         $data['allgalleries'] = Gallery::where('status', '=', 1)->count();
         $data['allevent'] = Event::where('status', 1)->count();
         $data['allusers'] = User::where('role_id', 2)->count();
@@ -145,7 +146,10 @@ class PageController extends Controller
     {
         $data['election'] = VoteCandidate::where('status', '=', 1)->get();
         $data['today'] = now();
-        $data['votedate'] = Votedate::where('status', 1)->latest('created_at')->get();
+        // Fetch the votedates, or initialize an empty collection if none are found
+        $votedate = Votedate::where('status', 1)->latest('created_at')->get();
+        $data['votedate'] = $votedate ?: collect();
+
         return view('frontend.election', $data);
     }
 
@@ -173,5 +177,16 @@ class PageController extends Controller
     {
         $data['products'] = Product::where('status', '=', 1)->get();
         return view('frontend.product', $data);
+    }
+
+    public function productdetails($slug)
+    {
+        $data['productdetails'] = Product::where('slug', '=', $slug)->first();
+        return view('frontend.productdetails', $data);
+    }
+
+    public function resetpassword()
+    {
+        return view('frontend.reset_password');
     }
 }

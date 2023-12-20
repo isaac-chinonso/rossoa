@@ -1,6 +1,7 @@
 @extends('layout.master')
 @section('title')
 Birthday Celebrants || Rssosa
+@endsection
 @section('content')
 
 <!--== Page Title Area Start ==-->

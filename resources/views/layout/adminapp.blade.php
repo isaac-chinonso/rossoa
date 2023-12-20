@@ -34,7 +34,7 @@
                 <div class="d-flex">
                     <!-- LOGO -->
                     <div class="navbar-brand-box">
-                        <a href="{{ url('admin/') }}" class="logo logo-dark">
+                        <a href="{{ url('/') }}" class="logo logo-dark">
                             <span class="logo-sm">
                                 <h3 class="text-white">RSSOSA</h3>
                             </span>

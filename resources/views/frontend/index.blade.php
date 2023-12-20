@@ -8,7 +8,7 @@ Homepage || Rssosa
 <div class="marquee">
     <p style="color: red;">
         @foreach($blogpost as $blog)
-        <a href="{{ route('blogdetails', $blog->slug) }}">{{ $blog->short_desc }}</a>
+        <a href="{{ route('blogdetails', $blog->slug) }}">{{ $blog->title }}</a>
         @endforeach
     </p>
 </div>
@@ -310,7 +310,7 @@ Homepage || Rssosa
 
                 </div><br><br>
                 <div align="center">
-                    <a href="{{ url('/events') }}" class="btn btn-brand btn-brand-dark" style="background-color: #008013;color:#fff;">Load Full Celebrants</a>
+                    <a href="{{ url('/birthday-celebrants') }}" class="btn btn-brand btn-brand-dark" style="background-color: #008013;color:#fff;">Load Full Celebrants</a>
                 </div>
             </div>
         </div>
@@ -429,6 +429,11 @@ Homepage || Rssosa
                                 </div>
                             </div>
                             @endforeach
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <a href="{{ url('/galleries') }}" class="btn btn-brand btn-loadmore">See More</a>
+                            </div>
                         </div>
                     </div>
                 </div>

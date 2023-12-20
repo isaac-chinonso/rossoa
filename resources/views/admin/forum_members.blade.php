@@ -40,6 +40,7 @@ Forum Members || ROSSOA
                                         <tr>
                                             <th>#</th>
                                             <th>Name</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
 
@@ -50,6 +51,29 @@ Forum Members || ROSSOA
                                         <tr>
                                             <td>{{ $number }}</td>
                                             <td>{{ $members->user->profile->first()->fname }} {{ $members->user->profile->first()->lname }}</td>
+                                            <td>
+                                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#responsive-modal2{{ $members->id }}"><i class="fa fa-trash"></i></button>
+                                                <!-- delete modal content -->
+                                                <div id="responsive-modal2{{ $members->id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title" id="myModalLabel">Delete Member</h4>
+                                                                <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">×</button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h4><strong>Confirm Deletion</strong></h4>
+                                                                <p>Are you sure you want to Delete {{ $members->user->profile->first()->fname }} from forum</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Close</button>
+                                                                <a href="{{ route('deleteforummembers',$members->id) }}" class="btn btn-danger btn-sm waves-effect waves-light">Delete Member</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal -->
+                                            </td>
                                         </tr>
                                         <?php $number++; ?>
                                         @endforeach

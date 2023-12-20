@@ -45,7 +45,6 @@ Forum || RSSOSA
                                 <button class="btn btn-success" style="padding: 7px;"><a href="{{ route('userforumchat', $member->group_id) }}" class="text-white">Open Forum</a></button>
                                 @endif
                                 @endforeach
-                            
                             </li>
                             <!-- sample modal content -->
                             <div id="myModal{{ $forum->id }}" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">

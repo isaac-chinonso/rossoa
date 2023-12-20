@@ -33,7 +33,7 @@ Scholarship || ROSSOA
                         <div class="card-body">
                             <h4 class="card-title">Scholarship Openings List</h4>
                             <div class="table-responsive">
-                                <table id="datatable" class="table table-bordered  w-100">
+                            <table id="datatable-buttons" class="table table-bordered w-100">
                                     <thead>
                                         <tr>
                                             <th>#</th>

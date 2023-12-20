@@ -36,7 +36,7 @@ Gallery || ROSSOA
                                                 <div class="col-md-12">
                                                     <label>Gallery Category</label>
                                                     <select class="form-control" name="category_id">
-                                                        <option selected disabled>Select Blog Category</option>
+                                                        <option selected disabled>Select Gallery Category</option>
                                                         @foreach($gallerycategory as $gallery)
                                                         <option value="{{ $gallery->id }}">{{ $gallery->name }}</option>
                                                         @endforeach
@@ -46,7 +46,7 @@ Gallery || ROSSOA
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label>Gallery Image</label>
-                                                    <input type="file" class="form-control" name="galleryimage">
+                                                    <input type="file" class="form-control" name="galleryimage[]" multiple>
                                                 </div>
                                             </div>
                                         </div>

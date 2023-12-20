@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\AdminVoteController;
 use App\Http\Controllers\User\UserPageController;
 use App\Http\Controllers\User\UserPostController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +51,8 @@ Route::post('/save-blog-comments', [PageController::class, 'saveblogcomment']);
 
 Route::get('/market-place', [PageController::class, 'products']);
 
+Route::get('/market-place/{slug}', [PageController::class, 'productdetails'])->name('marketdetails');
+
 Route::get('/donate', [PageController::class, 'donate']);
 
 Route::get('/committee', [PageController::class, 'committee']);
@@ -67,7 +71,7 @@ Route::get('/scholarship-application-form/{id}', [PageController::class, 'schola
 
 Route::post('/save-scholarship-application', [PostController::class, 'savescholarshipapplication']);
 
-Route::get('/election', [PageController::class, 'election'])->name('election');
+Route::get('/election', [PageController::class, 'election'])->middleware('auth')->name('election');
 
 Route::post('/cast-vote', [PostController::class, 'savevote'])->middleware('auth');
 
@@ -83,7 +87,16 @@ Route::get('authentication-confirmation', [PageController::class, 'profile1'])->
 
 Route::post('savelogin', [AuthController::class, 'savelogin']);
 
+Route::get('/forget-password', [PageController::class, 'resetpassword'])->name('forget.password.get');
+
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+
+Route::post('/forget-password-link', [ResetPasswordController::class, 'ForgetPasswordStore'])->name('forget.password.post');
+
+Route::post('/reset-password', [ResetPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'before' => 'admin'], function () {
 
@@ -111,9 +124,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'before' => 'admin'],
 
     Route::post('save-blog', [AdminBlogController::class, 'saveblog']);
 
-    Route::get('blog/{slug}', [AdminPageController::class, 'blogBySlug'])->name('blogview');
+    Route::get('blog/{slug}', [AdminPageController::class, 'blogdetails'])->name('blogview');
 
-    Route::post('update-blog', [AdminBlogController::class, 'updateBlog']);
+    Route::get('edit-blog/{slug}', [AdminPageController::class, 'editblog'])->name('editblog');
+
+    Route::post('update-blog/{slug}', [AdminBlogController::class, 'updateBlog'])->name('adminupdateblog');
 
     Route::get('delete-blog/{slug}', [AdminBlogController::class, 'deleteblog'])->name('deleteblog');
 
@@ -133,6 +148,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'before' => 'admin'],
 
     Route::post('update-vote-category/{id}', [AdminVoteController::class, 'updatevotecategory'])->name('updatevotingcategory');
 
+    Route::get('delete-voting-category/{id}', [AdminVoteController::class, 'deletevotecategory'])->name('deletevotecategory');
+
     Route::post('/save-vote-candidate', [AdminVoteController::class, 'savevotecandidate']);
 
     Route::post('/save-vote-date', [AdminVoteController::class, 'savevotedate']);
@@ -147,6 +164,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'before' => 'admin'],
 
     Route::post('update-batch-vote-category/{id}', [AdminVoteController::class, 'updatebatchvotecategory'])->name('updatebatchvotingcategory');
 
+    Route::get('delete-batch-vote-category/{id}', [AdminVoteController::class, 'deletebatchvotecategory'])->name('deletebatchvotecategory');
+
     Route::post('/save-batch-vote-candidate', [AdminVoteController::class, 'savebatchvotecandidate']);
 
     Route::get('/batch-voting-candidate/{id}', [AdminPageController::class, 'batchvotingcandidate'])->name('batchvotingcandidate');
@@ -160,6 +179,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'before' => 'admin'],
     Route::get('/event', [AdminPageController::class, 'event']);
 
     Route::post('/save-event', [AdminPostController::class, 'saveevent']);
+
+    Route::post('update-event/{id}', [AdminPostController::class, 'updateevent'])->name('adminupdateevent');
 
     Route::get('delete-event/{id}', [AdminPostController::class, 'deleteevent'])->name('deleteevent');
 
@@ -197,6 +218,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'before' => 'admin'],
 
     Route::get('/members', [AdminPageController::class, 'member']);
 
+    Route::get('delete-user/{id}', [AdminPostController::class, 'deleteuser'])->name('deleteuser');
+
     Route::get('/forum', [AdminPageController::class, 'forum']);
 
     Route::post('/save-forum', [AdminForumController::class, 'saveforum']);
@@ -208,6 +231,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'before' => 'admin'],
     Route::post('/save-forum-member', [AdminForumController::class, 'addmember'])->name('addforummember');
 
     Route::get('/forum-members/{id}', [AdminPageController::class, 'forummembers'])->name('forummembers');
+
+    Route::get('delete-forum-members/{id}', [AdminForumController::class, 'deletemember'])->name('deleteforummembers');
 
     Route::get('/pending-forum-members', [AdminPageController::class, 'pendingforummembers'])->name('pendingforummembers');
 

@@ -357,6 +357,36 @@ class AdminPostController extends Controller
         return back();
     }
 
+    // Update Event
+    public function updateevent(Request $request, $id)
+    {
+        $event = Event::find($id);
+        $this->validate($request, array(
+            'title' => 'required',
+            'date' => 'required',
+            'location' => 'required',
+            'description' => 'required',
+        ));
+
+        if ($request->hasFile('coverimage')) {
+            $image = $request->file('coverimage'); // Get the uploaded file
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $destination = public_path('event/');
+            $image->move($destination, $filename);
+            $event->coverimage = 'event/' . $filename; // Store the path to the image
+        }
+
+        $event->title = $request->input('title');
+        $event->date = $request->input('date');
+        $event->location = $request->input('location');;
+        $event->description = $request->input('description');
+        $event->save();
+
+        \Session::flash('Success_message', 'Event Update Successfully');
+
+        return back();
+    }
+
     public function deleteevent($id)
     {
         // Delete Event
@@ -365,7 +395,7 @@ class AdminPostController extends Controller
         unlink($file_path);
         $event->delete();
 
-        \Session::flash('Success_message', 'You Have Successfully Deleted product');
+        \Session::flash('Success_message', 'You Have Successfully Deleted this event');
 
         return back();
     }
@@ -503,21 +533,24 @@ class AdminPostController extends Controller
     public function savegallery(Request $request)
     {
         $this->validate($request, [
-            'galleryimage' => 'mimes:jpeg,jpg,png|required|max:5000',
+            'galleryimage' => 'required',
             'category_id' => 'required',
         ]);
 
-        $galleryimage = $request['galleryimage'];
-        $filename = time() . '.' . $galleryimage->getClientOriginalExtension();
-        $destination = public_path('gallery/');
-        $galleryimage->move($destination, $filename);
+        $images = $request->file('galleryimage');
 
-        // Save Record into Gallery DB
-        $gallery = new Gallery();
-        $gallery->category_id = $request->input('category_id');
-        $gallery->galleryimage = $filename;
-        $gallery->status = 1;
-        $gallery->save();
+        foreach ($images as $galleryimage) {
+
+            $filename = $galleryimage->getClientOriginalName();
+            $galleryimage->move(public_path('gallery/'), $filename);
+
+            // Save the image details to the database
+            $gallery = new Gallery();
+            $gallery->category_id = $request->input('category_id');
+            $gallery->galleryimage = $filename;
+            $gallery->status = 1;
+            $gallery->save();
+        }
 
         \Session::flash('Success_message', 'Gallery posted Successfully');
 

@@ -86,7 +86,7 @@ Election|| Rssosa
                 </div>
                 <div class="row">
 
-                    @if (empty($election)))
+                    @if (empty($election))
                     <div class="col-md-12">
                         <h1 class="text-danger text-center">No Ongoing Election</h1>
                     </div>
@@ -97,14 +97,13 @@ Election|| Rssosa
                             <img src="voting/{{ $elect->candidate_image }}" class="img-fluid img-thumbnail" alt="Committee" />
                             <h3>{{ $elect->user->profile->first()->fname }} {{ $elect->user->profile->first()->lname }}
                                 <span class="committee-deg">{{ $elect->category->name }}</span><br>
-
-                                @if (\Carbon\Carbon::parse($votedate->start) == now() )
+                                @if ($votedate->count() === 0)
+                                <!-- Display null or handle the empty case as needed -->
+                                @elseif (\Carbon\Carbon::now()->between($votedate->first()->start, $votedate->first()->end))
                                 <button type="button" class="btn btn-warning text-white" data-toggle="modal" data-target="#responsive-modal2{{ $elect->id }}" style="font-size: 20px;">Vote Candidate</button>
-                                @elseif (\Carbon\Carbon::parse($votedate->end) == now() )
-                                <button type="button" class="btn btn-warning text-white" data-toggle="modal" data-target="#responsive-modal2{{ $elect->id }}" style="font-size: 20px;">Vote Candidate</button>
-                                @elseif (\Carbon\Carbon::parse($votedate->end) < now() ) <span class="text-warning">Not Active</span>
-
-                                    @endif
+                                @elseif (\Carbon\Carbon::now()->greaterThan($votedate->first()->end))
+                                <span class="text-warning">Not Active</span>
+                                @endif
                             </h3>
                         </div>
                     </div>
